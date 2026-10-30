@@ -95,6 +95,7 @@ programa con un `modelo` guionizado. Lo que este README compromete:
 | Etiqueta | Qué hay |
 |---|---|
 | `b5-l1` | El agente del bloque 4, en ficheros y sobre el modelo guionizado (`guionizado.py`, `entorno.py`, `permisos.py`, `bucle.py`, `agente.py`, `tests/`), el `Modelfile` y `protocolo.py`, un turno del protocolo hecho a mano. `python -m unittest` pasa sin el servidor. |
+| `b5-l2` | El adaptador `api.py` (`ModeloAPI`, la firma de `modelo` sobre la API de mensajes, con `urllib` y `json`), `correr.py` (un pedido contra el modelo local, turno a turno) y `tests/test_api.py`. Ningún fichero de `b5-l1` cambia. |
 
 ## Licencia
 
