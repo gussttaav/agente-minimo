@@ -36,11 +36,24 @@ Cada lección enlaza dos etiquetas: la **anterior** donde empieza su paso de imp
 («parte de aquí») y la **suya** donde termina («si te has perdido, este es el estado al final de
 esta lección»). Ninguna lección enlaza `main`: `main` se mueve; una etiqueta, no.
 
-Para partir de una lección concreta:
+Para partir de una lección concreta, clona su etiqueta. `--branch` acepta tanto una rama como
+una etiqueta, y aquí sólo hay etiquetas:
 
 ```bash
 git clone --branch b5-l3 --depth 1 https://github.com/gussttaav/agente-minimo.git
 cd agente-minimo
+git switch -c mi-agente
+```
+
+Git avisará de que la etiqueta «is not a commit» y de que no estás en ninguna rama: las dos
+cosas son normales. La última orden crea tu propia rama, para que lo que escribas a partir de
+aquí quede guardado en ella.
+
+Si más adelante te pierdes y quieres saltar a otra etiqueta sin clonar de nuevo:
+
+```bash
+git fetch --depth 1 origin tag b5-l5
+git switch -c desde-l5 b5-l5
 ```
 
 Las etiquetas se cortan cuando se revisa la lección, así que una etiqueta que todavía no existe
