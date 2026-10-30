@@ -48,16 +48,26 @@ es una lección que todavía no se ha publicado.
 
 ## Versiones
 
-<!-- TODO (COURSE-C2-P1-05): rellenar al publicar la lección 32, con las versiones exactas
-     sobre las que se verificó cada etiqueta en una máquina limpia. Hasta entonces esta tabla
-     está vacía a propósito: una versión sin verificar es peor que ninguna. -->
+<!-- COURSE-C2-P1-05: verificado el 2026-10-30 con la etiqueta b5-l1. El bloque se verifica con
+     un solo modelo; uno mayor (16 GB de RAM) sólo se mide en la lección 39. -->
 
 | Qué | Versión verificada |
 |---|---|
-| Python | ≥ 3.11 |
-| Runner del modelo local | _pendiente_ |
-| Modelo (16 GB de RAM) | _pendiente_ |
-| Modelo (8 GB de RAM) | _pendiente_ |
+| Python | ≥ 3.11 (verificado con 3.14) |
+| Runner del modelo local | Ollama 0.40.13 |
+| Modelo | `qwen3:4b-instruct` (Q4_K_M, unos 2.5 GB; funciona con 8 GB de RAM y sin GPU) |
+
+El código sólo nombra un modelo, `local`, que creas con el `Modelfile`: el fichero dice de qué
+modelo partir y fija la ventana de contexto del curso, 8192 tokens.
+
+```bash
+ollama pull qwen3:4b-instruct
+ollama create local -f Modelfile
+```
+
+Con más memoria puedes cambiar la línea `FROM` del `Modelfile` por un modelo mayor y volver a
+crear `local`. El código no cambia; las salidas esperadas de las lecciones son las del modelo de
+la tabla.
 
 El runner y las etiquetas de los modelos son *versiones*, no el objeto del curso: el programa
 habla un protocolo de mensajes sobre `urllib` y `json`, sin SDK, y cambiar de runner es cambiar
@@ -82,8 +92,9 @@ programa con un `modelo` guionizado. Lo que este README compromete:
 
 ## Estado
 
-Vacío de código, a propósito. Las lecciones lo llenan una a una, y cada etiqueta aparece con la
-lección que la corta.
+| Etiqueta | Qué hay |
+|---|---|
+| `b5-l1` | El agente del bloque 4, en ficheros y sobre el modelo guionizado (`guionizado.py`, `entorno.py`, `permisos.py`, `bucle.py`, `agente.py`, `tests/`), el `Modelfile` y `protocolo.py`, un turno del protocolo hecho a mano. `python -m unittest` pasa sin el servidor. |
 
 ## Licencia
 

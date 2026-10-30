@@ -1,0 +1,4 @@
+# El modelo local del curso, con la ventana de contexto del curso. Funciona con 8 GB de RAM.
+#   ollama create local -f Modelfile
+FROM qwen3:4b-instruct
+PARAMETER num_ctx 8192
