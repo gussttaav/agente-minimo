@@ -5,8 +5,8 @@ Allí era una función global que los tests sustituían; en ficheros, quien llam
 se pregunta. Sin nadie a quien preguntar (usuario=None), preguntar cuenta como denegar.
 """
 from entorno import FUNCIONES, error, incumple, resultado
+from herramientas import CLASES                      # cada herramienta dice la suya
 
-CLASES = {"leer": "lectura", "listar": "lectura", "buscar": "lectura", "escribir": "escritura"}
 PERMISOS = {"lectura": "permitir", "escritura": "preguntar", "ejecución": "preguntar"}
 
 

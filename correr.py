@@ -1,14 +1,19 @@
-"""Un pedido al agente, contra el modelo local, turno a turno. Lección 33 del curso.
+"""Un pedido al agente, sobre una copia de una carpeta, contra el modelo local, turno a turno.
 
-    python correr.py "¿Qué recetas hay y cuál lleva cebolla?"
+Lecciones 33 y 34 del curso.
+
+    python correr.py ejemplo "Los tests fallan: ejecuta python -m unittest y arregla compra.py."
 """
 import json
+import shutil
 import sys
+import tempfile
 import time
+from pathlib import Path
 
 from agente import agente
 from api import ModeloAPI
-from entorno import ENTORNO
+from herramientas.comun import visible
 
 
 def linea(b):
@@ -17,7 +22,8 @@ def linea(b):
         return "texto        " + " ".join(b["text"].split())
     if b["type"] == "tool_use":
         return "llamada      %s %s" % (b["name"], json.dumps(b["input"], ensure_ascii=False))
-    return ("error        " if b["is_error"] else "observación  ") + b["content"].replace("\n", " / ")
+    return (("error        " if b["is_error"] else "observación  ")
+            + b["content"].rstrip("\n").replace("\n", "\n" + " " * 18))
 
 
 class Traza:
@@ -40,9 +46,19 @@ class Traza:
         return r
 
 
-entorno = dict(ENTORNO)
-motivo, texto, M = agente(Traza(ModeloAPI()), sys.argv[1], entorno)
-print(motivo, "·", "%d mensajes en M" % len(M))
-for ruta in sorted(entorno):
-    if entorno[ruta] != ENTORNO.get(ruta):
-        print("cambia", ruta, "->", entorno[ruta])
+def usuario(ll):
+    """Tú, en la terminal: cada escritura y cada comando, antes de que corran."""
+    return input("  ?  ¿permites %s? [s/N] " % linea(ll)[13:]).strip().lower() == "s"
+
+
+carpeta, pedido = sys.argv[1], sys.argv[2]
+entorno = tempfile.mkdtemp()                        # una copia: la carpeta no se toca
+shutil.copytree(carpeta, entorno, dirs_exist_ok=True)
+motivo, texto, M = agente(Traza(ModeloAPI()), pedido, entorno, usuario=usuario)
+print(motivo, "·", "%d mensajes en M" % len(M), "· la copia está en", entorno)
+for f in sorted(Path(entorno).rglob("*")):
+    ruta = f.relative_to(entorno)
+    antes = Path(carpeta, ruta)
+    igual = antes.is_file() and antes.read_bytes() == f.read_bytes()
+    if f.is_file() and visible(ruta) and not igual:
+        print("cambia", ruta.as_posix())

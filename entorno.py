@@ -1,44 +1,17 @@
-"""El entorno del bloque 4, sus cuatro herramientas y los bloques del protocolo.
+"""Los bloques del protocolo, el esquema de cada llamada y los ficheros de los tests.
 
-Lecciones 26 y 28 del curso. El entorno es un diccionario {ruta: contenido}, en memoria:
-la lección 34 lo cambia por los ficheros de verdad.
+Lecciones 26 y 28 del curso. Hasta la lección 34, también el entorno: un diccionario en
+memoria con cuatro herramientas. Ahora el entorno es una carpeta de tu disco, las herramientas
+están en herramientas/, y el diccionario es lo que los tests escriben en una carpeta temporal.
 """
 import json
+
+from herramientas import FUNCIONES, HERRAMIENTAS     # bucle y permisos las importan de aquí
 
 ENTORNO = {"lista.txt": "pan, leche, patatas",
            "notas.txt": "El sábado vienen cuatro a cenar.",
            "recetas/gazpacho.txt": "Gazpacho: tomates, pepino, pimiento, ajo.",
            "recetas/tortilla.txt": "Tortilla: huevos, patatas, cebolla."}
-
-
-def leer(entorno, ruta):                  # las funciones son del harness: el modelo no las ve
-    if ruta not in entorno:
-        raise FileNotFoundError("no existe el fichero %r" % ruta)
-    return entorno[ruta]
-def escribir(entorno, ruta, contenido):
-    entorno[ruta] = contenido
-    return "escritos %d caracteres en %s" % (len(contenido), ruta)
-def listar(entorno, carpeta):
-    return "\n".join(r for r in sorted(entorno) if r.startswith(carpeta))
-def buscar(entorno, patron):
-    return "\n".join("%s: %s" % (r, linea) for r in sorted(entorno)
-                     for linea in entorno[r].split("\n") if patron in linea)
-FUNCIONES = {"leer": leer, "escribir": escribir, "listar": listar, "buscar": buscar}
-
-
-def objeto(**campos):                     # un esquema: estos campos, de texto y obligatorios
-    return {"type": "object", "required": list(campos), "additionalProperties": False,
-            "properties": {c: {"type": "string", "description": d} for c, d in campos.items()}}
-HERRAMIENTAS = [                          # lo que lee el modelo: nombre, descripción, esquema
-    {"name": "leer", "description": "Devuelve el contenido entero de un fichero.",
-     "input_schema": objeto(ruta="la ruta del fichero")},
-    {"name": "escribir", "description": "Sustituye el contenido entero de un fichero, o lo "
-     "crea si no existe. Lo que tuviera se pierde.",
-     "input_schema": objeto(ruta="la ruta del fichero", contenido="el contenido nuevo, entero")},
-    {"name": "listar", "description": "Las rutas que empiezan por carpeta, una por línea.",
-     "input_schema": objeto(carpeta="un principio de ruta, como recetas/; vacío, todas")},
-    {"name": "buscar", "description": "Las líneas que contienen patron tal cual, con su ruta.",
-     "input_schema": objeto(patron="el texto que buscar")}]
 
 
 def texto(t):
