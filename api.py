@@ -30,7 +30,7 @@ def enviar(p):
         cabeceras.update({"x-api-key": CLAVE, "anthropic-version": "2023-06-01"})
     req = urllib.request.Request(URL, data=json.dumps(p).encode("utf-8"), headers=cabeceras)
     try:
-        with urllib.request.urlopen(req, timeout=300) as r:
+        with urllib.request.urlopen(req, timeout=900) as r:       # lección 36: 300 no bastan
             return json.load(r)
     except urllib.error.HTTPError as e:              # un 400, un 404: el servidor dice por qué
         raise RuntimeError("el servidor contesta %d: %s" % (e.code, e.read().decode("utf-8")))

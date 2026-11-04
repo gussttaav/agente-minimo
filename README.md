@@ -25,7 +25,6 @@ Una etiqueta por lección, `b5-l1` … `b5-l9`, cortada del código de la lecci�
 | `b5-l1` | 32 · Preparar la máquina: un modelo local y la API de mensajes |
 | `b5-l2` | 33 · El bucle con un modelo real |
 | `b5-l3` | 34 · Herramientas: leer, buscar, editar, ejecutar |
-| `b5-l4` | El inicio de M tiene dos voces: `agente.py` trae un prompt de sistema nuevo (las reglas del agente en cualquier repositorio) y lee el fichero de proyecto, `AGENTE.md`, si la carpeta tiene uno, en un segundo mensaje de sistema. `ejemplo/AGENTE.md` (cómo se ejecutan sus tests), `coste.py` (lo que ocupa cada pieza fija de M en la ventana) y `tests/test_inicio.py`. `bucle.py`, `api.py`, `permisos.py`, `herramientas/` y `correr.py` no cambian. |
 | `b5-l4` | 35 · El prompt de sistema y el fichero de proyecto |
 | `b5-l5` | 36 · Compactación: cuando la ventana se llena |
 | `b5-l6` | 37 · Permisos y sandbox |
@@ -111,6 +110,8 @@ programa con un `modelo` guionizado. Lo que este README compromete:
 | `b5-l1` | El agente del bloque 4, en ficheros y sobre el modelo guionizado (`guionizado.py`, `entorno.py`, `permisos.py`, `bucle.py`, `agente.py`, `tests/`), el `Modelfile` y `protocolo.py`, un turno del protocolo hecho a mano. `python -m unittest` pasa sin el servidor. |
 | `b5-l2` | El adaptador `api.py` (`ModeloAPI`, la firma de `modelo` sobre la API de mensajes, con `urllib` y `json`), `correr.py` (un pedido contra el modelo local, turno a turno) y `tests/test_api.py`. Ningún fichero de `b5-l1` cambia. |
 | `b5-l3` | El entorno es una carpeta de tu disco. `herramientas/`, un fichero por herramienta (`leer`, `buscar`, `editar`, `escribir`, `ejecutar`) con lo que lee el modelo, su clase y su función; `ejemplo/`, un proyecto de dos ficheros con dos tests que no pasan; `tests/test_herramientas.py`. `correr.py` trabaja sobre una copia de una carpeta y pregunta antes de cada escritura y cada comando. `bucle.py`, `agente.py`, `api.py` y `guionizado.py` no cambian. |
+| `b5-l4` | El inicio de M tiene dos voces: `agente.py` trae un prompt de sistema nuevo (las reglas del agente en cualquier repositorio) y lee el fichero de proyecto, `AGENTE.md`, si la carpeta tiene uno, en un segundo mensaje de sistema. `ejemplo/AGENTE.md` (cómo se ejecutan sus tests), `coste.py` (lo que ocupa cada pieza fija de M en la ventana) y `tests/test_inicio.py`. `bucle.py`, `api.py`, `permisos.py`, `herramientas/` y `correr.py` no cambian. |
+| `b5-l5` | La compactación: `compactar.py` (cuando el servidor ha contado más de `UMBRAL` = 4096 tokens, el modelo resume los turnos viejos y el harness los cambia por ese resumen, dejando tal cual el inicio de M y los dos últimos turnos), un paso nuevo en `bucle.py` entre la respuesta y las observaciones, `agente.py` y `correr.py` que lo pasan, `api.py` que espera 900 s, `tests/test_compactar.py` y `recetario/`, un proyecto de cinco ficheros que llena la ventana. `permisos.py`, `herramientas/`, `entorno.py` y `guionizado.py` no cambian. |
 
 ## Licencia
 

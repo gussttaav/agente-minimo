@@ -1,4 +1,4 @@
-"""El agente: el inicio y el bucle. Lecciones 31 y 35 del curso.
+"""El agente: el inicio y el bucle. Lecciones 31, 35 y 36 del curso.
 
 El inicio de M tiene dos voces. El prompt de sistema es la del harness: qué es el agente y
 qué reglas sigue en cualquier repositorio. El fichero de proyecto, AGENTE.md, es la del
@@ -29,6 +29,6 @@ def inicio(pedido, entorno=None):
     return M + [("usuario", pedido)]
 
 
-def agente(modelo, pedido, entorno, tope=10, usuario=None):
+def agente(modelo, pedido, entorno, tope=10, usuario=None, compactar=None):
     """Un pedido, hasta que el modelo no pida nada o se acabe el tope: (motivo, texto, M)."""
-    return bucle(modelo, inicio(pedido, entorno), entorno, tope, usuario)
+    return bucle(modelo, inicio(pedido, entorno), entorno, tope, usuario, compactar)

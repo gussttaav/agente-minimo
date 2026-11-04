@@ -1,0 +1,48 @@
+# El recetario de casa. Una receta por línea: «Nombre: ingrediente, ingrediente, ingrediente.»
+# Las líneas que empiezan por # son comentarios, y las secciones van separadas por una línea en blanco.
+
+# Primeros
+Gazpacho: Tomates, pepino, pimiento verde, ajo, aceite, vinagre, sal.
+Salmorejo: Tomates, pan, aceite, ajo, sal.
+Ensalada mixta: lechuga, tomates, cebolla, atún, huevos, aceitunas, aceite, vinagre.
+Crema de calabacín: calabacín, puerro, patatas, quesitos, aceite, sal.
+Lentejas: lentejas, chorizo, zanahoria, patatas, pimiento verde, cebolla, ajo, pimentón.
+Garbanzos con espinacas: garbanzos, espinacas, ajo, pan, comino, pimentón, aceite.
+Sopa de ajo: ajo, pan, huevos, pimentón, caldo de pollo, aceite.
+Porrusalda: puerro, patatas, zanahoria, bacalao, aceite, sal.
+Ensaladilla rusa: patatas, zanahoria, guisantes, huevos, atún, aceitunas, mayonesa.
+Pisto: calabacín, pimiento rojo, pimiento verde, cebolla, tomates, aceite, sal.
+Judías verdes con patatas: judías verdes, patatas, ajo, pimentón, aceite.
+Arroz a la cubana: arroz, tomate frito, huevos, plátano, aceite.
+Menestra: guisantes, alcachofas, judías verdes, zanahoria, jamón, cebolla, aceite.
+Champiñones al ajillo: champiñones, ajo, perejil, guindilla, aceite.
+
+# Segundos
+Tortilla: Huevos, patatas, cebolla, aceite, sal.
+Pollo al ajillo: pollo, ajo, vino blanco, laurel, aceite, sal.
+Albóndigas: carne picada, huevos, pan rallado, cebolla, ajo, tomate frito, perejil.
+Merluza en salsa verde: merluza, ajo, perejil, guisantes, vino blanco, aceite.
+Lomo con pimientos: lomo de cerdo, pimiento rojo, pimiento verde, ajo, aceite.
+Macarrones con tomate: macarrones, tomate frito, carne picada, cebolla, queso rallado.
+Paella de verduras: arroz, judías verdes, alcachofas, pimiento rojo, tomates, azafrán, aceite.
+Bacalao a la vizcaína: bacalao, pimientos choriceros, cebolla, ajo, tomates, aceite.
+Pollo asado: pollo, patatas, cebolla, limón, ajo, tomillo, aceite.
+Calamares a la romana: calamares, harina, huevos, limón, aceite.
+Huevos rotos: huevos, patatas, jamón, aceite, sal.
+Croquetas de jamón: jamón, leche, harina, mantequilla, huevos, pan rallado, aceite.
+Sardinas asadas: sardinas, sal gruesa, limón, pimientos de padrón.
+Pimientos rellenos: pimiento rojo, carne picada, arroz, cebolla, tomate frito.
+Revuelto de setas: setas, huevos, ajo, perejil, aceite.
+Cocido: garbanzos, morcillo, chorizo, tocino, gallina, repollo, patatas, zanahoria.
+
+# Postres
+Arroz con leche: arroz, leche, azúcar, canela, limón.
+Natillas: leche, huevos, azúcar, maicena, canela, galletas.
+Flan: huevos, leche, azúcar, vainilla.
+Torrijas: pan, leche, huevos, azúcar, canela, aceite.
+Bizcocho de yogur: yogur, harina, azúcar, huevos, aceite, levadura, limón.
+Crema catalana: leche, huevos, azúcar, maicena, limón, canela.
+Tarta de queso: queso crema, huevos, azúcar, nata, harina.
+Macedonia: naranjas, manzanas, plátano, fresas, kiwi, zumo de naranja.
+Peras al vino: peras, vino tinto, azúcar, canela, clavo.
+Churros: harina, agua, sal, aceite, azúcar.
