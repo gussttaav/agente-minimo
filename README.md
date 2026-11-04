@@ -25,6 +25,7 @@ Una etiqueta por lección, `b5-l1` … `b5-l9`, cortada del código de la lecci�
 | `b5-l1` | 32 · Preparar la máquina: un modelo local y la API de mensajes |
 | `b5-l2` | 33 · El bucle con un modelo real |
 | `b5-l3` | 34 · Herramientas: leer, buscar, editar, ejecutar |
+| `b5-l4` | El inicio de M tiene dos voces: `agente.py` trae un prompt de sistema nuevo (las reglas del agente en cualquier repositorio) y lee el fichero de proyecto, `AGENTE.md`, si la carpeta tiene uno, en un segundo mensaje de sistema. `ejemplo/AGENTE.md` (cómo se ejecutan sus tests), `coste.py` (lo que ocupa cada pieza fija de M en la ventana) y `tests/test_inicio.py`. `bucle.py`, `api.py`, `permisos.py`, `herramientas/` y `correr.py` no cambian. |
 | `b5-l4` | 35 · El prompt de sistema y el fichero de proyecto |
 | `b5-l5` | 36 · Compactación: cuando la ventana se llena |
 | `b5-l6` | 37 · Permisos y sandbox |
