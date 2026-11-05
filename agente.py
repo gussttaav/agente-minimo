@@ -1,4 +1,4 @@
-"""El agente: el inicio y el bucle. Lecciones 31, 35 y 36 del curso.
+"""El agente: el inicio y el bucle. Lecciones 31, 35, 36 y 38 del curso.
 
 El inicio de M tiene dos voces. El prompt de sistema es la del harness: qué es el agente y
 qué reglas sigue en cualquier repositorio. El fichero de proyecto, AGENTE.md, es la del
@@ -7,6 +7,7 @@ repositorio: cómo se trabaja en éste. Se lee una vez, al empezar.
 from pathlib import Path
 
 from bucle import bucle
+from subagente import REGLA, con_delegar
 
 SISTEMA = """Eres un agente de programación. Trabajas en un repositorio, la carpeta de trabajo (.), y sólo sabes de él lo que te devuelven tus herramientas.
 
@@ -20,15 +21,23 @@ SISTEMA = """Eres un agente de programación. Trabajas en un repositorio, la car
 PROYECTO = "AGENTE.md"
 
 
-def inicio(pedido, entorno=None):
+def inicio(pedido, entorno=None, sistema=SISTEMA):
     """M al empezar: el prompt de sistema, el fichero de proyecto si lo hay, y el pedido."""
-    M = [("sistema", SISTEMA)]
+    M = [("sistema", sistema)]
     if entorno is not None and Path(entorno, PROYECTO).is_file():
         proyecto = Path(entorno, PROYECTO).read_text(encoding="utf-8")
         M.append(("sistema", "El fichero de proyecto, %s:\n\n%s" % (PROYECTO, proyecto)))
     return M + [("usuario", pedido)]
 
 
-def agente(modelo, pedido, entorno, tope=10, usuario=None, compactar=None):
-    """Un pedido, hasta que el modelo no pida nada o se acabe el tope: (motivo, texto, M)."""
-    return bucle(modelo, inicio(pedido, entorno), entorno, tope, usuario, compactar)
+def agente(modelo, pedido, entorno, tope=10, usuario=None, compactar=None, delegar=None):
+    """Un pedido, hasta que el modelo no pida nada o se acabe el tope: (motivo, texto, M).
+
+    Lección 38: con delegar, el modelo de los subagentes, el agente tiene una herramienta más,
+    y su prompt de sistema, una regla que dice para qué.
+    """
+    if delegar is None:
+        return bucle(modelo, inicio(pedido, entorno), entorno, tope, usuario, compactar)
+    herramientas, funciones = con_delegar(delegar)
+    return bucle(modelo, inicio(pedido, entorno, SISTEMA + "\n" + REGLA), entorno, tope, usuario,
+                 compactar, herramientas, funciones)

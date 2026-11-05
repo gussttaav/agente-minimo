@@ -7,8 +7,10 @@ se pregunta. Sin nadie a quien preguntar (usuario=None), preguntar cuenta como d
 Lección 37: el permiso mira también qué comando pide una llamada de ejecución, y antes que el
 permiso va el sandbox, que nadie puede abrir: toda ruta que nombra una llamada, resuelta,
 tiene que caer dentro de la carpeta de trabajo.
+
+Lección 38: cada bucle dice qué herramientas tiene y con qué funciones; un subagente, menos.
 """
-from entorno import FUNCIONES, error, incumple, resultado
+from entorno import FUNCIONES, HERRAMIENTAS, error, incumple, resultado
 from herramientas import CLASES, RUTAS               # cada herramienta dice las suyas
 from herramientas.comun import dentro
 from herramientas.ejecutar import partes
@@ -39,9 +41,9 @@ def fuera(ll, entorno):
     return next((r for r in rutas if not dentro(entorno, r)), None)
 
 
-def ejecutar(ll, entorno, usuario=None):
+def ejecutar(ll, entorno, usuario=None, herramientas=HERRAMIENTAS, funciones=FUNCIONES):
     """Siempre un tool_result. El esquema, el sandbox, el permiso y, por último, la función."""
-    motivo = incumple(ll)
+    motivo = incumple(ll, herramientas)
     if motivo is not None:
         return error(ll["id"], "no se ha ejecutado: " + motivo)
     ruta = fuera(ll, entorno)
@@ -53,7 +55,7 @@ def ejecutar(ll, entorno, usuario=None):
     if decision == "preguntar" and not (usuario and usuario(ll)):
         return error(ll["id"], "no se ha ejecutado: el usuario no lo ha permitido")
     try:
-        contenido = FUNCIONES[ll["name"]](entorno, **ll["input"])
+        contenido = funciones[ll["name"]](entorno, **ll["input"])
     except Exception as e:
         return error(ll["id"], str(e))
     return resultado(ll["id"], contenido)

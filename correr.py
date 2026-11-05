@@ -1,6 +1,6 @@
 """Un pedido al agente, sobre una copia de una carpeta, contra el modelo local, turno a turno.
 
-Lecciones 33, 34 y 36 del curso.
+Lecciones 33, 34, 36 y 38 del curso.
 
     python correr.py ejemplo "Los tests fallan: ejecuta python -m unittest y arregla compra.py."
 """
@@ -29,22 +29,25 @@ def linea(b):
 
 class Traza:
     """Un modelo que envuelve a otro y escribe lo que viaja. Para el bucle, es un modelo más."""
-    def __init__(self, modelo):
-        self.modelo, self.turno, self.usage = modelo, 0, None
+    def __init__(self, modelo, sangria=""):        # lección 38: el subagente, con sangría
+        self.modelo, self.turno, self.usage, self.sangria = modelo, 0, None, sangria
+
+    def escribe(self, s):
+        print(self.sangria + s.replace("\n", "\n" + self.sangria))
 
     def __call__(self, mensajes, herramientas=()):
         rol, contenido = mensajes[-1]
         if rol == "usuario" and isinstance(contenido, list):     # las observaciones de antes
             for b in contenido:
-                print("  →  " + linea(b))
+                self.escribe("  →  " + linea(b))
         resumen = contenido == INSTRUCCION                       # la compactación, no un turno
         self.turno, t = self.turno + (not resumen), time.time()
         r = self.modelo(mensajes, herramientas)
         self.usage = u = self.modelo.usage                       # compactar mira aquí
-        print("%s  %.0f s  %d tokens de entrada" % ("resumen" if resumen else "turno %d" % self.turno,
+        self.escribe("%s  %.0f s  %d tokens de entrada" % ("resumen" if resumen else "turno %d" % self.turno,
               time.time() - t, u["input_tokens"] + u.get("cache_read_input_tokens", 0)))
         for b in r:
-            print("  ←  " + linea(b))
+            self.escribe("  ←  " + linea(b))
         return r
 
 
@@ -56,7 +59,8 @@ def usuario(ll):
 carpeta, pedido = sys.argv[1], sys.argv[2]
 entorno = tempfile.mkdtemp()                        # una copia: la carpeta no se toca
 shutil.copytree(carpeta, entorno, dirs_exist_ok=True)
-motivo, texto, M = agente(Traza(ModeloAPI()), pedido, entorno, usuario=usuario, compactar=compactar)
+motivo, texto, M = agente(Traza(ModeloAPI()), pedido, entorno, usuario=usuario, compactar=compactar,
+                          delegar=Traza(ModeloAPI(), "      │ "))
 print(motivo, "·", "%d mensajes en M" % len(M), "· la copia está en", entorno)
 for f in sorted(Path(entorno).rglob("*")):
     ruta = f.relative_to(entorno)

@@ -3,12 +3,15 @@
 Cada fichero tiene tres partes, para tres lectores: HERRAMIENTA, lo que lee el modelo; CLASE,
 lo que lee el permiso; y la función, lo que ejecuta el harness sobre el entorno, que es una
 carpeta de tu disco.
+
+Lección 38: delegar tiene clase y rutas, pero no está en HERRAMIENTAS ni en FUNCIONES. Su
+función necesita un modelo; la monta subagente.py, para el agente que la quiera.
 """
-from herramientas import buscar, editar, ejecutar, escribir, leer
+from herramientas import buscar, delegar, editar, ejecutar, escribir, leer
 
 MODULOS = [leer, buscar, editar, escribir, ejecutar]
 HERRAMIENTAS = [m.HERRAMIENTA for m in MODULOS]
-CLASES = {m.HERRAMIENTA["name"]: m.CLASE for m in MODULOS}
-RUTAS = {m.HERRAMIENTA["name"]: m.RUTAS for m in MODULOS}       # lección 37
+CLASES = {m.HERRAMIENTA["name"]: m.CLASE for m in MODULOS + [delegar]}      # lección 38
+RUTAS = {m.HERRAMIENTA["name"]: m.RUTAS for m in MODULOS + [delegar]}       # lecciones 37 y 38
 FUNCIONES = {"leer": leer.leer, "buscar": buscar.buscar, "editar": editar.editar,
              "escribir": escribir.escribir, "ejecutar": ejecutar.ejecutar}

@@ -20,7 +20,7 @@ def tokens(modelo):
     return u["input_tokens"] + u.get("cache_read_input_tokens", 0) + u["output_tokens"]
 
 
-def compactar(modelo, M, umbral=UMBRAL, k=RECIENTES):
+def compactar(modelo, M, umbral=UMBRAL, k=RECIENTES, herramientas=HERRAMIENTAS):
     """M, o M con los turnos viejos cambiados por un resumen. M acaba en una respuesta."""
     if tokens(modelo) <= umbral:
         return M
@@ -28,7 +28,7 @@ def compactar(modelo, M, umbral=UMBRAL, k=RECIENTES):
     corte = len(M) - (2 * k - 1)            # aquí empiezan los k turnos recientes
     if corte - p < 2:                       # ningún turno viejo que resumir
         return M
-    r = modelo(M[:corte] + [("usuario", INSTRUCCION)], HERRAMIENTAS)
+    r = modelo(M[:corte] + [("usuario", INSTRUCCION)], herramientas)   # las del bucle: la caché
     resumen = " ".join(b["text"] for b in r if b["type"] == "text").strip()
     if not resumen:                         # sin resumen no se quita nada
         return M

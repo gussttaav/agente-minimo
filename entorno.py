@@ -33,9 +33,13 @@ def muestra(b):                                      # un bloque, en una línea
 
 TIPOS = {"string": str, "integer": int, "boolean": bool}
 
-def incumple(b):
-    """Por qué no se puede ejecutar la llamada b, o None si cumple su esquema."""
-    h = next((h for h in HERRAMIENTAS if h["name"] == b["name"]), None)
+def incumple(b, herramientas=HERRAMIENTAS):
+    """Por qué no se puede ejecutar la llamada b, o None si cumple su esquema.
+
+    Lección 38: el esquema es el de las herramientas que se le ofrecen al modelo, y una que no
+    se le ofrece no existe.
+    """
+    h = next((h for h in herramientas if h["name"] == b["name"]), None)
     if h is None:
         return "no hay ninguna herramienta %r" % b["name"]
     esquema, argumentos = h["input_schema"], b["input"]
