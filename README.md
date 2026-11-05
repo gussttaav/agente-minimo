@@ -97,7 +97,7 @@ programa con un `modelo` guionizado. Lo que este README compromete:
   modelo local; el otro es un modelo guionizado, para las pruebas. El agente es el mismo
   programa con un `modelo` distinto.
 - **Un fichero por herramienta** (`leer`, `buscar`, `editar`, `escribir`, `ejecutar`), **uno
-  para el bucle, uno para los permisos, uno para la compactación.**
+  para el bucle, uno para los permisos y el sandbox, uno para la compactación.**
 - **`tareas/`**: los cinco repositorios diminutos del mini-benchmark de la lección 39, cinco
   ficheros cada uno.
 - **Python ≥ 3.11 y la biblioteca estándar.** Sin dependencias: eso también es parte de lo que
@@ -112,6 +112,7 @@ programa con un `modelo` guionizado. Lo que este README compromete:
 | `b5-l3` | El entorno es una carpeta de tu disco. `herramientas/`, un fichero por herramienta (`leer`, `buscar`, `editar`, `escribir`, `ejecutar`) con lo que lee el modelo, su clase y su función; `ejemplo/`, un proyecto de dos ficheros con dos tests que no pasan; `tests/test_herramientas.py`. `correr.py` trabaja sobre una copia de una carpeta y pregunta antes de cada escritura y cada comando. `bucle.py`, `agente.py`, `api.py` y `guionizado.py` no cambian. |
 | `b5-l4` | El inicio de M tiene dos voces: `agente.py` trae un prompt de sistema nuevo (las reglas del agente en cualquier repositorio) y lee el fichero de proyecto, `AGENTE.md`, si la carpeta tiene uno, en un segundo mensaje de sistema. `ejemplo/AGENTE.md` (cómo se ejecutan sus tests), `coste.py` (lo que ocupa cada pieza fija de M en la ventana) y `tests/test_inicio.py`. `bucle.py`, `api.py`, `permisos.py`, `herramientas/` y `correr.py` no cambian. |
 | `b5-l5` | La compactación: `compactar.py` (cuando el servidor ha contado más de `UMBRAL` = 4096 tokens, el modelo resume los turnos viejos y el harness los cambia por ese resumen, dejando tal cual el inicio de M y los dos últimos turnos), un paso nuevo en `bucle.py` entre la respuesta y las observaciones, `agente.py` y `correr.py` que lo pasan, `api.py` que espera 900 s, `tests/test_compactar.py` y `recetario/`, un proyecto de cinco ficheros que llena la ventana. `permisos.py`, `herramientas/`, `entorno.py` y `guionizado.py` no cambian. |
+| `b5-l6` | El sandbox y la lista de comandos: `permisos.py` comprueba, antes del permiso y sin preguntar, que toda ruta de una llamada caiga dentro de la carpeta de trabajo (`dentro`, en `herramientas/comun.py`, con las `RUTAS` que declara cada herramienta), y permite sin preguntar los comandos de `COMANDOS`, enteros. `herramientas/ejecutar.py` corre sin shell (`partes`, con `shlex`), y `buscar` salta los ficheros que caen fuera. `tests/test_permisos.py` y `ajeno/`, un repositorio con una inyección en su `AGENTE.md`. `bucle.py`, `agente.py`, `compactar.py`, `api.py` y `correr.py` no cambian. |
 
 ## Licencia
 

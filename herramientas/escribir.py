@@ -4,6 +4,7 @@ from pathlib import Path
 from herramientas.comun import objeto
 
 CLASE = "escritura"
+RUTAS = ["ruta"]                     # lección 37: los argumentos que mira el sandbox
 HERRAMIENTA = {"name": "escribir", "description": "Crea un fichero nuevo con este contenido. "
                "Si el fichero ya existe, no lo toca: para cambiar un fichero que existe, usa "
                "editar.",

@@ -4,6 +4,7 @@ from pathlib import Path
 from herramientas.comun import objeto
 
 CLASE = "escritura"
+RUTAS = ["ruta"]                     # lección 37: los argumentos que mira el sandbox
 HERRAMIENTA = {"name": "editar", "description": "Cambia en el fichero ruta el texto antiguo "
                "por nuevo. antiguo tiene que aparecer en el fichero exactamente una vez, "
                "copiado tal cual, con sus espacios y sus saltos de línea; si no, no cambia "

@@ -1,9 +1,10 @@
 """buscar(patron, ruta): las líneas que lo contienen, sin distinguir mayúsculas. Lección 34."""
 from pathlib import Path
 
-from herramientas.comun import objeto, visible
+from herramientas.comun import dentro, objeto, visible
 
 CLASE = "lectura"
+RUTAS = ["ruta"]                     # lección 37: los argumentos que mira el sandbox
 HERRAMIENTA = {"name": "buscar", "description": "Las líneas que contienen patron, sin "
                "distinguir mayúsculas, en el fichero ruta o en todos los de la carpeta ruta, "
                "cada una como ruta:número: línea.",
@@ -17,7 +18,7 @@ def buscar(entorno, patron, ruta):
         raise FileNotFoundError("no existe %r" % ruta)
     ficheros = [p] if p.is_file() else sorted(f for f in p.rglob("*") if f.is_file())
     lineas = []
-    for f in (f for f in ficheros if visible(f.relative_to(entorno))):
+    for f in (f for f in ficheros if visible(f.relative_to(entorno)) and dentro(entorno, f)):
         try:
             texto = f.read_text(encoding="utf-8")
         except UnicodeDecodeError:                   # un fichero binario no tiene líneas

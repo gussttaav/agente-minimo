@@ -4,6 +4,7 @@ from pathlib import Path
 from herramientas.comun import objeto, visible
 
 CLASE = "lectura"
+RUTAS = ["ruta"]                     # lección 37: los argumentos que mira el sandbox
 HERRAMIENTA = {"name": "leer", "description": "Devuelve el contenido entero de un fichero. "
                "Si ruta es una carpeta, lo que hay dentro, una ruta por línea; las carpetas "
                "acaban en /. La carpeta de trabajo es .",
