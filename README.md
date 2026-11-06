@@ -29,6 +29,7 @@ Una etiqueta por lección, `b5-l1` … `b5-l9`, cortada del código de la lecci�
 | `b5-l5` | 36 · Compactación: cuando la ventana se llena |
 | `b5-l6` | 37 · Permisos y sandbox |
 | `b5-l7` | 38 · Subagentes: un bucle dentro de otro |
+| `b5-l8` | El mini-benchmark: `banco/`, cinco pruebas (cada una, `repo/`, el repositorio que recibe el agente; `pedido.txt`; `evaluador.py`, unos tests que el agente no ve; y `solucion/`, los ficheros de un arreglo bueno), `medir.py` (cada prueba unas cuantas veces, sobre una copia, con un usuario que sólo permite escrituras; el evaluador mira la copia al terminar, y la tasa de acierto sale con su intervalo de Wilson) y `tests/test_banco.py` (cada evaluador da 0 al repositorio sin tocar y 1 con la solución). Nada de lo anterior cambia. |
 | `b5-l8` | 39 · Un mini-benchmark: medir harness por modelo |
 | `b5-l9` | 40 · MCP y lo que viene |
 
@@ -98,8 +99,8 @@ programa con un `modelo` guionizado. Lo que este README compromete:
   programa con un `modelo` distinto.
 - **Un fichero por herramienta** (`leer`, `buscar`, `editar`, `escribir`, `ejecutar`), **uno
   para el bucle, uno para los permisos y el sandbox, uno para la compactación.**
-- **`tareas/`**: los cinco repositorios diminutos del mini-benchmark de la lección 39, cinco
-  ficheros cada uno.
+- **`banco/`**: las cinco pruebas del mini-benchmark de la lección 39, cada una un repositorio
+  diminuto (`repo/`), su pedido, su evaluador y una solución.
 - **Python ≥ 3.11 y la biblioteca estándar.** Sin dependencias: eso también es parte de lo que
   enseña. No hace falta un entorno virtual; las lecciones lo muestran igualmente por costumbre.
 

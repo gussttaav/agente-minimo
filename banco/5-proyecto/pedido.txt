@@ -1,0 +1,1 @@
+Añade a ofertas.py una función descuento(precio, por_ciento) que devuelva el precio con ese tanto por ciento de descuento, y un test suyo en test_ofertas.py.
