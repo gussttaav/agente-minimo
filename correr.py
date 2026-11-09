@@ -1,8 +1,12 @@
 """Un pedido al agente, sobre una copia de una carpeta, contra el modelo local, turno a turno.
 
-Lecciones 33, 34, 36 y 38 del curso.
+Lecciones 33, 34, 36, 38 y 40 del curso.
 
     python correr.py ejemplo "Los tests fallan: ejecuta python -m unittest y arregla compra.py."
+
+Lo que siga al pedido es el comando que lanza un servidor MCP, y el agente usa sus herramientas:
+
+    python correr.py ejemplo "¿Qué incidencias abiertas hay?" python servidor_incidencias.py
 """
 import json
 import shutil
@@ -13,6 +17,7 @@ from pathlib import Path
 
 from agente import agente
 from api import ModeloAPI
+from cliente_mcp import ServidorMCP
 from compactar import INSTRUCCION, compactar
 from herramientas.comun import visible
 
@@ -57,10 +62,15 @@ def usuario(ll):
 
 
 carpeta, pedido = sys.argv[1], sys.argv[2]
+servidor = ServidorMCP(*sys.argv[3:]) if sys.argv[3:] else None
 entorno = tempfile.mkdtemp()                        # una copia: la carpeta no se toca
 shutil.copytree(carpeta, entorno, dirs_exist_ok=True)
-motivo, texto, M = agente(Traza(ModeloAPI()), pedido, entorno, usuario=usuario, compactar=compactar,
-                          delegar=Traza(ModeloAPI(), "      │ "))
+try:
+    motivo, texto, M = agente(Traza(ModeloAPI()), pedido, entorno, usuario=usuario, compactar=compactar,
+                              delegar=Traza(ModeloAPI(), "      │ "), servidor=servidor)
+finally:
+    if servidor:
+        servidor.cerrar()
 print(motivo, "·", "%d mensajes en M" % len(M), "· la copia está en", entorno)
 for f in sorted(Path(entorno).rglob("*")):
     ruta = f.relative_to(entorno)

@@ -31,7 +31,7 @@ Una etiqueta por lección, `b5-l1` … `b5-l9`, cortada del código de la lecci�
 | `b5-l7` | 38 · Subagentes: un bucle dentro de otro |
 | `b5-l8` | El mini-benchmark: `banco/`, cinco pruebas (cada una, `repo/`, el repositorio que recibe el agente; `pedido.txt`; `evaluador.py`, unos tests que el agente no ve; y `solucion/`, los ficheros de un arreglo bueno), `medir.py` (cada prueba unas cuantas veces, sobre una copia, con un usuario que sólo permite escrituras; el evaluador mira la copia al terminar, y la tasa de acierto sale con su intervalo de Wilson) y `tests/test_banco.py` (cada evaluador da 0 al repositorio sin tocar y 1 con la solución). Nada de lo anterior cambia. |
 | `b5-l8` | 39 · Un mini-benchmark: medir harness por modelo |
-| `b5-l9` | 40 · MCP y lo que viene |
+| `b5-l9` | 40 · MCP y lo que viene: `servidor_incidencias.py` (un servidor MCP por stdio, con una herramienta, y sus datos en `incidencias.json`), `cliente_mcp.py` (`ServidorMCP`, que lo lanza y lo descubre, y `con_servidor`, que suma sus herramientas a las del agente), `mcp_a_mano.py` (lo que viaja, sin modelo) y `tests/test_mcp.py`. `permisos.py` gana `AJENAS`, la clase de cada herramienta ajena; `agente.py`, el argumento `servidor`; `correr.py`, el comando del servidor tras el pedido. |
 
 Cada lección enlaza dos etiquetas: la **anterior** donde empieza su paso de implementación
 («parte de aquí») y la **suya** donde termina («si te has perdido, este es el estado al final de
@@ -70,6 +70,7 @@ es una lección que todavía no se ha publicado.
 | Python | ≥ 3.11 (verificado con 3.14) |
 | Runner del modelo local | Ollama 0.40.13 |
 | Modelo | `qwen3:4b-instruct` (Q4_K_M, unos 2.5 GB; funciona con 8 GB de RAM y sin GPU) |
+| Protocolo MCP (lección 40) | revisión 2026-07-28 |
 
 El código sólo nombra un modelo, `local`, que creas con el `Modelfile`: el fichero dice de qué
 modelo partir y fija la ventana de contexto del curso, 8192 tokens.

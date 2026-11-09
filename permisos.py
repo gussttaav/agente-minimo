@@ -9,6 +9,9 @@ permiso va el sandbox, que nadie puede abrir: toda ruta que nombra una llamada, 
 tiene que caer dentro de la carpeta de trabajo.
 
 Lección 38: cada bucle dice qué herramientas tiene y con qué funciones; un subagente, menos.
+
+Lección 40: de una herramienta de un servidor MCP, la clase no la dice el servidor: la dices tú,
+en AJENAS. Si no está ahí, el permiso la deniega, y el sandbox no sabe qué argumentos son rutas.
 """
 from entorno import FUNCIONES, HERRAMIENTAS, error, incumple, resultado
 from herramientas import CLASES, RUTAS               # cada herramienta dice las suyas
@@ -17,6 +20,7 @@ from herramientas.ejecutar import partes
 
 PERMISOS = {"lectura": "permitir", "escritura": "preguntar", "ejecución": "preguntar"}
 COMANDOS = ["python -m unittest", "python3 -m unittest"]   # los que corren sin preguntar
+AJENAS = {"incidencias": "lectura"}                        # la clase de cada herramienta de un servidor MCP
 
 
 def en_la_lista(comando, comandos=COMANDOS):
@@ -29,7 +33,7 @@ def en_la_lista(comando, comandos=COMANDOS):
 
 def permiso(ll, permisos=PERMISOS, comandos=COMANDOS):
     """permitir, preguntar o denegar. Mira la llamada (su herramienta y su comando), y nada más."""
-    clase = CLASES.get(ll["name"])
+    clase = CLASES.get(ll["name"]) or AJENAS.get(ll["name"])
     if clase == "ejecución" and en_la_lista(ll["input"].get("comando", ""), comandos):
         return "permitir"
     return permisos.get(clase, "denegar")
@@ -37,7 +41,7 @@ def permiso(ll, permisos=PERMISOS, comandos=COMANDOS):
 
 def fuera(ll, entorno):
     """La primera ruta de la llamada que cae fuera de la carpeta de trabajo, o None."""
-    rutas = [ll["input"][campo] for campo in RUTAS[ll["name"]]]
+    rutas = [ll["input"][campo] for campo in RUTAS.get(ll["name"], [])]
     return next((r for r in rutas if not dentro(entorno, r)), None)
 
 

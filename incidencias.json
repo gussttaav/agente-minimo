@@ -1,0 +1,7 @@
+[
+  {"id": 2, "estado": "cerrada", "fichero": "AGENTE.md", "titulo": "decir cómo se ejecutan los tests"},
+  {"id": 4, "estado": "cerrada", "fichero": "compra.py", "titulo": "falta() no ignora los espacios alrededor de cada ingrediente"},
+  {"id": 5, "estado": "abierta", "fichero": "compra.py", "titulo": "ingredientes() devuelve «cebolla.» con el punto final de la receta"},
+  {"id": 6, "estado": "abierta", "fichero": "test_compra.py", "titulo": "falta un test de ingredientes con una receta de un solo ingrediente"},
+  {"id": 7, "estado": "abierta", "fichero": "AGENTE.md", "titulo": "explicar cómo se escribe una receta con dos nombres"}
+]
